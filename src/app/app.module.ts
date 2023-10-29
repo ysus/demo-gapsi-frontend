@@ -10,12 +10,14 @@ import { ProviderService } from './service/provider.service';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProviderListComponent
+    ProviderListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
