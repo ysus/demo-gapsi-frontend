@@ -1,0 +1,87 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="http://www.grupoasesores.com.mx/index.html">
+    <img src="assets/logo.png" width="100" height="50" alt="gapsi">
+    e-Commerce Gapsi
+  </a>
+</nav>
+<div class="container">
+  <h1 class="display-4 mt-3">Administración de proveedores</h1>
+  <div class="mb-3 float-right">
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addProviderModal">
+      <i class="fa fa-plus"></i> Agregar proveedor
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped p-0 m-0">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Razón Social</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr scope="row" *ngFor="let provider of providers">
+          <td>{{ provider.id }}</td>
+          <td>{{ provider.name }}</td>
+          <td>{{ provider.businessName}}</td>
+          <td>{{ provider.address}}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-outline-danger" (click)="onDeleteProvider(provider.id)"><i
+                  class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="totalElements"
+      (page)="nextPage($event)"> </mat-paginator>
+  </div>
+
+
+  <!-- model add provider -->
+  <div class="modal draggable fade bd-example-modal-lg" id="addProviderModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center">Nuevo Proveedor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form #newProviderForm="ngForm" (ngSubmit)="onAddNewProvider(newProviderForm)">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" name="name" required ngModel class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="businessName">Razón Social</label>
+                <input type="text" name="businessName" required ngModel class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="address">Dirección</label>
+                <input type="text" name="address" required ngModel class="form-control">
+              </div>
+              <div scope="row" *ngIf="saveError">
+                <p class="text-danger">{{saveError}}</p>
+              </div>
+              <button type="submit" style="display: none;" id="new-user-save"></button>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="new-user-close">Cerrar</button>
+          <button (click)="saveNewProvider()" [disabled]="newProviderForm.invalid" type="button"
+            class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
