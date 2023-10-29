@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProviderListComponent } from './provider-list/provider-list.component';
 
 const routes: Routes = [
-  {path: 'providers', component: ProviderListComponent}
+  {path: 'providers', component: ProviderListComponent},
+  { path: '', redirectTo: '/providers', pathMatch: 'full'}
+
 ];
 
 @NgModule({
